@@ -57,24 +57,25 @@ class DataRetriever:
                 unique_fields.append(row[index])
         return unique_fields
 
-    def get_chosen_date_rows(self, date_index: int, filter_func):
+    def get_chosen_date_rows(self, date_index: int, choosing_func, language: str = 'es'):
         """
-        Get data rows that fulfill certain criteria
-        :param date_index: Index of data 'column' to be analyzed
-        :param filter_func: Function returning accepted dates that take all possible
-                            dates as an argument
-        :return: Row(s) with accepted dates
+        Get data rows that contain date fulfilling certain criteria.
+        :param date_index: Index of 'column' where dates are stored
+        :param choosing_func: Function returning accepted date. Takes all possible
+                              dates as an argument
+        :param language: Language code that for date format, e.g. [‘en’, ‘es’, ‘zh-Hant’]
+        :return: Row(s) containing accepted date
         """
         dates_str = self.get_concatenated_fields([date_index])
         dates_datetime = []
 
         for date in dates_str:
-            dates_datetime.append(dateparser.parse(date))
-        earliest_date = filter_func(dates_datetime)
-        earliest_indexes = np.where(np.array(dates_datetime) == earliest_date)[0]
+            dates_datetime.append(dateparser.parse(date, languages=[language]))
+        filtered_date = choosing_func(dates_datetime)
+        indexes = np.where(np.array(dates_datetime) == filtered_date)[0]
 
         results = []
-        for index in list(earliest_indexes):
+        for index in list(indexes):
             results.append(self._data[index])
 
         return results

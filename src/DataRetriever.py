@@ -41,9 +41,10 @@ class DataRetriever:
             concatenated = ''
             for index in indexes:
                 concatenated += row[index]
-                if index != indexes[-1]:
-                    concatenated += delimiter
-            result.append(concatenated)
+                concatenated += delimiter
+            concatenated = concatenated.strip(delimiter)
+            if concatenated:
+                result.append(concatenated)
         return result
 
     def get_unique_fields(self, index):

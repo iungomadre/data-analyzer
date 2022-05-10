@@ -13,6 +13,12 @@ CORRUPTED_DATA = [
     ['four', 'five']
 ]
 
+MISSING_DATA = [
+    ['one', 'two', 'three'],
+    ['one', 'yy', 'zz'],
+    ['', '', 'z']
+]
+
 EMPTY_DATA = []
 
 PARTIALLY_EMPTY_DATA = [
@@ -69,6 +75,12 @@ class TestDataRetriever:
         retriever = DataRetriever(DATA)
         expected = ['one two three', 'one yy zz', 'x y z']
         actual = retriever.get_concatenated_fields([0, 1, 2], ' ')
+        assert actual == expected
+
+    def test_get_concatenated_does_not_return_only_delimiter(self):
+        retriever = DataRetriever(MISSING_DATA)
+        expected = ['one two', 'one yy']
+        actual = retriever.get_concatenated_fields([0, 1], ' ')
         assert actual == expected
 
     def test_get_unique_fields(self):

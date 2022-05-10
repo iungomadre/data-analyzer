@@ -6,7 +6,7 @@
 ## How to run
     $ conda create --name <env> --file requirements.txt
     $ conda activate <env>
-    $ python solution.py data/data.csv
+    $ python src/solution.py data/data.csv
 
 ## How to test
     $ pytest

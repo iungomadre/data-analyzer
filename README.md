@@ -6,7 +6,7 @@
 ## How to run
     $ conda create --name <env> --file <this file>
     $ conda activate <env>
-    $ python solution.py data.csv
+    $ python solution.py data/data.csv
 
 ## How to test
     $ pytest
@@ -18,6 +18,16 @@ rather than on pure graphical interface. `solution.py` solves task, but
 uses console only in order to represent
 solution in a raw form that would normally be used in any other python
 module.
+
+## Configuration
+There is possibility to configure mandatory fields (when data row in CSV file 
+does not contain data there, it will be skipped) and language used for dates
+and alphabet.
+
+![img.png](docs/configuration.png)
+
+## Solution
+![img.png](docs/solution.png)
 
 ## Task description
 

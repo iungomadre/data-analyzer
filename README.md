@@ -1,12 +1,25 @@
 # Data analyzer
 
-## Navigate
-
 ## Requirements
+- conda 4.10.3
 
 ## How to run
+    $ conda create --name <env> --file <this file>
+    $ conda activate <env>
+    $ python solution.py data.csv
 
-## Description
+## How to test
+    $ pytest
+
+# Important note
+When solving this task I decided to focus on module functionality and
+ability to quickly add new features
+rather than on pure graphical interface. `solution.py` solves task, but
+uses console only in order to represent
+solution in a raw form that would normally be used in any other python
+module.
+
+## Task description
 
 I want to analyze my Company data so that I could take advantage of this info and make more money for my company (this is a highly competitive sector). No DB usage is needed, we just need to read the csv file and show the results on the screen.
 

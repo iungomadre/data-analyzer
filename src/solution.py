@@ -41,11 +41,8 @@ if __name__ == '__main__':
     # JOBS
     jobs = sorted(retriever.get_unique_fields(header.index('Job')), key=ALPHABET_SORT_KEY)
 
-    # prints data
+    # print data
     print(f'Earliest Check-In Date: {earliest_checkin_customer}')
     print(f'Latest Check-In Date: {latest_checkin_customer}')
     print(f'Customer full names: {customer_full_names}')
     print(f'Jobs: {jobs}')
-
-
-

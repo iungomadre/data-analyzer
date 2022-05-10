@@ -4,7 +4,7 @@
 - conda 4.10.3
 
 ## How to run
-    $ conda create --name <env> --file <this file>
+    $ conda create --name <env> --file requirements.txt
     $ conda activate <env>
     $ python solution.py data/data.csv
 

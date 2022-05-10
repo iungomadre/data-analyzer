@@ -1,4 +1,5 @@
 import csv
+import logging
 
 from typing import List
 
@@ -28,12 +29,12 @@ class CSVParser:
 
             for row in reader:
                 if len(row) != len(header):
-                    # TODO log that row corrupted
+                    logging.warning(f'Corrupted row skipped - wrong fields number\n{row}')
                     continue
 
                 required_fields = [False if row[required_id] == '' else True for required_id in mandatory_ids]
                 if not all(required_fields):
-                    # TODO log that row did not have required fields
+                    logging.warning(f'Corrupted row skipped - lacks required field(s)\n{row}')
                     continue
 
                 data.append(row)

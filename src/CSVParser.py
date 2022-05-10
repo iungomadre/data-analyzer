@@ -4,6 +4,10 @@ import logging
 from typing import List
 
 
+class CSVHeaderMissingException(Exception):
+    pass
+
+
 class CSVParser:
     """ Generic CSV parser """
 
@@ -24,7 +28,12 @@ class CSVParser:
         data = []
         with open(self._fname, 'r') as file:
             reader = csv.reader(file)
-            header = next(reader)
+
+            try:
+                header = next(reader)
+            except StopIteration:
+                raise CSVHeaderMissingException
+
             mandatory_ids = [header.index(field) for field in self._mandatory_fields]
 
             for row in reader:
@@ -38,8 +47,5 @@ class CSVParser:
                     continue
 
                 data.append(row)
-
-        if not header:
-            raise Exception('No header found in CSV file')
 
         return header, data

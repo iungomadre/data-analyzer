@@ -1,6 +1,6 @@
 import pytest
 
-from src.CSVParser import CSVParser
+from src.CSVParser import CSVParser, CSVHeaderMissingException
 
 
 class TestCSVParser:
@@ -74,12 +74,12 @@ class TestCSVParser:
 
         # then
         with pytest.raises(FileNotFoundError):
-            header, data = CSVParser(path).parse_file()
+            CSVParser(path).parse_file()
 
     def test_raises_exception_empty_file(self):
         # given
-        path = 'test/mock_data/non_existing_file.csv'
+        path = 'test/mock_data/test_raises_exception_empty_file.csv'
 
         # then
-        with pytest.raises(Exception) as err:
-            header, data = CSVParser(path).parse_file()
+        with pytest.raises(CSVHeaderMissingException):
+            CSVParser(path).parse_file()
